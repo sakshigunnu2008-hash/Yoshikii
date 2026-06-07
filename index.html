@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heal Within 🌸</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(#0f0f1a,#1f1f35);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:15px;
+}
+
+.container{
+width:100%;
+max-width:450px;
+}
+
+.screen{display:none;}
+.active{display:block;}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#ff4d6d;
+color:white;
+font-weight:bold;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+border:none;
+background:#222;
+color:white;
+}
+
+.card{
+background:#1f1f35;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- START -->
+<div class="screen active" id="start">
+<h2>🌸 Heal Within</h2>
+<p>Choose your group</p>
+
+<button onclick="selectGroup('hurt')">💔 Hurt Group</button>
+<button onclick="selectGroup('hurted')">⚡ Who Hurted Group</button>
+</div>
+
+<!-- QUESTIONS -->
+<div class="screen" id="form">
+<h3 id="groupTitle"></h3>
+
+<div class="card">
+<p>1. What happened?</p>
+<textarea id="a1"></textarea>
+
+<p>2. How did you feel?</p>
+<textarea id="a2"></textarea>
+
+<p>3. What do you want now?</p>
+<textarea id="a3"></textarea>
+</div>
+
+<button onclick="showResult()">Finish</button>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="result">
+<h3>🌸 Your Reflection</h3>
+
+<div class="card">
+<p><b>Group:</b> <span id="g"></span></p>
+<p><b>Answer 1:</b> <span id="r1"></span></p>
+<p><b>Answer 2:</b> <span id="r2"></span></p>
+<p><b>Answer 3:</b> <span id="r3"></span></p>
+</div>
+
+<div class="card">
+<p>💬 Now share this with the other group and understand each other's side.</p>
+</div>
+
+<button onclick="restart()">Start Again</button>
+</div>
+
+</div>
+
+<script>
+
+let group = "";
+
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function selectGroup(g){
+group = g;
+
+document.getElementById("groupTitle").innerText =
+g === "hurt"
+? "💔 Hurt Group Questions"
+: "⚡ Who Hurted Group Questions";
+
+show("form");
+}
+
+function showResult(){
+document.getElementById("g").innerText =
+group === "hurt" ? "Hurt 💔" : "Who Hurted ⚡";
+
+document.getElementById("r1").innerText =
+document.getElementById("a1").value;
+
+document.getElementById("r2").innerText =
+document.getElementById("a2").value;
+
+document.getElementById("r3").innerText =
+document.getElementById("a3").value;
+
+show("result");
+}
+
+function restart(){
+location.reload();
+}
+
+</script>
+
+</body>
+</html>
